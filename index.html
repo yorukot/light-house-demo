@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 勞動條款風險審查</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">勞動條款審查工具</p>
+          <h1>AI 勞動條款風險審查</h1>
+        </div>
+      </header>
+
+      <main class="workspace" aria-live="polite">
+        <section class="panel input-panel" aria-labelledby="input-title">
+          <div class="panel-header">
+            <div>
+              <h2 id="input-title">勞動契約附件</h2>
+            </div>
+            <button id="resetBtn" class="icon-button" type="button" title="重設範例" aria-label="重設範例">
+              ↺
+            </button>
+          </div>
+
+          <label class="field-label" for="contractInput">條款文字</label>
+          <textarea id="contractInput" spellcheck="false"></textarea>
+
+          <div class="input-footer">
+            <div class="text-stats">
+              <span id="charCount">0</span>
+              <span>字</span>
+            </div>
+            <button id="analyzeBtn" class="primary-button" type="button">
+              <span>開始分析</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="panel output-panel" aria-labelledby="output-title">
+          <div class="panel-header">
+            <div>
+              <h2 id="output-title">指標評級與偵測結果</h2>
+            </div>
+            <div id="overallBadge" class="overall-badge is-idle">待分析</div>
+          </div>
+
+          <div class="analysis-stage">
+            <div class="progress-shell" aria-hidden="true">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <canvas id="signalCanvas" width="880" height="220" aria-hidden="true"></canvas>
+            <div class="stage-overlay">
+              <p id="stageTitle" class="stage-title">等待契約輸入</p>
+              <p id="stageCopy" class="stage-copy">按下開始分析後，系統會模擬拆解條款並產生指標表格。</p>
+            </div>
+          </div>
+
+          <div class="thinking-header">
+            <span>Thinking</span>
+            <span id="thinkingStatus">等待分析</span>
+          </div>
+          <div id="thinkingLog" class="thinking-log" aria-label="AI 思考紀錄">
+            <div class="chat-message is-muted">
+              <div class="chat-role">AI</div>
+              <div class="chat-bubble">尚未開始分析。</div>
+            </div>
+          </div>
+
+          <div id="summary" class="summary is-hidden">
+            <div>
+              <p class="summary-label">整體評估</p>
+              <p class="summary-title">中度風險，需補強程序與資料最小化</p>
+            </div>
+            <p class="summary-copy">
+              條款已揭露監控、AI 訓練、跨境傳輸與拒絕權，但對螢幕畫面、數位軌跡、特種資料隔離、程序磋商與替代手段仍描述不足。
+            </p>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">指標</th>
+                  <th scope="col">評級</th>
+                  <th scope="col">內容分析與偵測結果</th>
+                </tr>
+              </thead>
+              <tbody id="resultBody">
+                <tr class="empty-row">
+                  <td colspan="3">分析完成後會在這裡顯示結果。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
