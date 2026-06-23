@@ -100,10 +100,10 @@ let activeStep = 0;
 let isAnalyzing = false;
 let currentProgress = 0;
 
-const STEP_DURATION_MIN_MS = 2400;
-const STEP_DURATION_MAX_MS = 3600;
-const FINAL_DURATION_MIN_MS = 1100;
-const FINAL_DURATION_MAX_MS = 1600;
+const STEP_DURATION_MIN_MS = 1800;
+const STEP_DURATION_MAX_MS = 2600;
+const FINAL_DURATION_MIN_MS = 800;
+const FINAL_DURATION_MAX_MS = 1100;
 
 function updateCharCount() {
   charCount.textContent = contractInput.value.trim().length.toLocaleString("zh-Hant");
@@ -260,7 +260,7 @@ async function addTypedLog(text, active = true) {
   thinkingLog.appendChild(message);
   thinkingLog.scrollTop = thinkingLog.scrollHeight;
 
-  await wait(randomBetween(160, 340));
+  await wait(randomBetween(100, 220));
   dots.remove();
   bubble.textContent = "";
   bubble.append(caret);
@@ -268,7 +268,7 @@ async function addTypedLog(text, active = true) {
   for (const char of text) {
     caret.before(char);
     thinkingLog.scrollTop = thinkingLog.scrollHeight;
-    await wait(randomBetween(10, 28));
+    await wait(randomBetween(6, 16));
   }
 
   caret.remove();
@@ -358,7 +358,7 @@ async function analyze() {
   setProgress(3);
 
   await addTypedLog("Thinking 已啟動，正在建立條款審查脈絡。", true);
-  await wait(randomBetween(420, 760));
+  await wait(randomBetween(260, 480));
 
   for (let index = 0; index < steps.length; index += 1) {
     activeStep = index;
